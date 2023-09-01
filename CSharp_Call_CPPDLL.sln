@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_Call_CPPDLL", "CSharp_Call_CPPDLL\CSharp_Call_CPPDLL.csproj", "{146C5300-CDD9-45D0-B992-83422D358480}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPPDLL", "CPPDLL\CPPDLL.vcxproj", "{76EF93B2-CB38-4412-AE37-E1E707D924D8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CLRDLL", "CLRDLL\CLRDLL.vcxproj", "{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|x64.Build.0 = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Debug|x86.Build.0 = Debug|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|x64.ActiveCfg = Release|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|x64.Build.0 = Release|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|x86.ActiveCfg = Release|Any CPU
+		{146C5300-CDD9-45D0-B992-83422D358480}.Release|x86.Build.0 = Release|Any CPU
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Debug|x64.ActiveCfg = Debug|x64
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Debug|x64.Build.0 = Debug|x64
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Debug|x86.ActiveCfg = Debug|Win32
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Debug|x86.Build.0 = Debug|Win32
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Release|Any CPU.ActiveCfg = Release|Win32
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Release|x64.ActiveCfg = Release|x64
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Release|x64.Build.0 = Release|x64
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Release|x86.ActiveCfg = Release|Win32
+		{76EF93B2-CB38-4412-AE37-E1E707D924D8}.Release|x86.Build.0 = Release|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Debug|x64.ActiveCfg = Debug|x64
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Debug|x64.Build.0 = Debug|x64
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Debug|x86.ActiveCfg = Debug|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Debug|x86.Build.0 = Debug|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Release|Any CPU.ActiveCfg = Release|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Release|x64.ActiveCfg = Release|x64
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Release|x64.Build.0 = Release|x64
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Release|x86.ActiveCfg = Release|Win32
+		{ADBEAA07-09F4-4AB0-BA97-DC48EF331D84}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19FDA9C3-3B25-457C-BA33-0726148154B8}
+	EndGlobalSection
+EndGlobal
