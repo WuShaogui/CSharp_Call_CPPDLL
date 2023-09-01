@@ -11,30 +11,14 @@ extern "C"
 	// 封送基础数据类型
 	__declspec(dllexport) void func1(int a, double b, char c,int& d,double& e,char& f);
 
+	// 封送数组
+	__declspec(dllexport) void func2(int* a, int aNum, int* b, int*& c, int& cNum);
 
-	// 封送一维数据结构
-	struct point {
-		int a;
-		double b;
-		char c;
-	};
+	// 封送数据结构
+	__declspec(dllexport) void func3(point a, point& b);
 
-	// 封送嵌套的数据结构
-
-
-	/// <summary>
-	/// 接口1:验证C#向C++传递结构体二维数组	
-	/// </summary>
-	/// <param name="ployPoints">结构体的二维数组</param>
-	/// <param name="ployNum">结构体数量</param>
-	/// <param name="ployPointsNum">每个二维数组的长度</param>
-	__declspec(dllexport) void ProcessPoints(point** ployPoints, int ployNum, int* ployPointsNum);
-
-	/// <summary>
-	/// 接口2:验证C#申请一维结构指针空间，C++申请二维结构空间	
-	/// </summary>
-	/// <param name="ployPoints">结构体的二维数组</param>
-	/// <param name="ployNum">结构体数量</param>
-	/// <param name="ployPointsNum">每个二维数组的长度</param>
-	__declspec(dllexport) void ProcessPointsv2(point** ployPoints, int ployNum, int* ployPointsNum);
+	// 封送结构指针
+	__declspec(dllexport) void func4(point* a, int aNum,point* b,int bNum);  // 一重
+	__declspec(dllexport) void func5(point** ployPoints, int ployNum, int* ployPointsNum); // 二重,C#->C++
+	__declspec(dllexport) void func6(point** ployPoints, int ployNum, int* ployPointsNum); // 二重,C++->C#
 }

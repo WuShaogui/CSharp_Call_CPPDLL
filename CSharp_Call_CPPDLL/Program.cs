@@ -5,24 +5,11 @@ using System.Runtime.InteropServices;
 public class Program
 {
 
-    [DllImport("CPPDLL.dll", EntryPoint = "func1", SetLastError = true, CharSet = CharSet.Ansi)]
-    public static extern unsafe void func1(int a, double b, char c,ref int d,ref double e,ref char f);
-
-    public static void test_func1()
-    {
-        int a = 1; double b = 2.2;char c = 'H';
-        int d=0; double e=0; char f=' ';
-        Console.WriteLine("[i n]C#  :"+a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
-        func1(a, b, c,ref d,ref e,ref f);
-        Console.WriteLine("[out]C#  :" + a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
-    }
-
-
-    public struct Point
+    public struct point
     {
         public double x;
         public double y;
-        public Point(double x_, double y_)
+        public point(double x_, double y_)
         {
             x = x_;
             y = y_;
@@ -30,35 +17,138 @@ public class Program
     };
 
 
-    [DllImport("CPPDLL.dll", EntryPoint = "ProcessPoints", SetLastError = true, CharSet = CharSet.Ansi)]
-    public static extern unsafe void ProcessPoints(Point** points, int num_ploy, int* length);
 
+    [DllImport("CPPDLL.dll", EntryPoint = "func1", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func1(int a, double b, char c, out int d,out double e, out char f);
 
-    public static void Test_interface1()
+    public static void test_func1()
     {
-        Point[] abc = {
-            new Point(1.1,2.1),
-            new Point(3,4),
-            new Point(5,6.3)
+        int a = 1; double b = 2.2;char c = 'H';
+        int d=0; double e=0; char f=' ';
+        Console.WriteLine("[i n]C#  :"+a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
+        func1(a, b, c, out d, out e, out f);
+        Console.WriteLine("[out]C#  :" + a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
+    }
+
+    [DllImport("CPPDLL.dll", EntryPoint = "func2", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func2(int* a, int aNum,int* b,out IntPtr c, out int cNum);
+
+    public static void test_func2()
+    {
+        int aNum = 3;
+        int[] a=new int[aNum];
+        for(int i=0;i<aNum;i++)
+        {
+            a[i] = i + 10;
+        }
+
+        int[] b = new int[2];
+
+        int cNum = 0;
+        unsafe
+        {
+            fixed (int* a_ptr = a)
+            {
+                fixed (int* b_ptr = b)
+                {
+                    IntPtr c;
+                    func2(a_ptr, aNum, b_ptr, out c, out cNum);
+
+                    Console.WriteLine("b:" + b[0]+","+b[1]);
+
+                    Console.WriteLine("cNum:" + cNum);
+                    int[] arr = new int[cNum];
+                    Marshal.Copy(c, arr, 0, cNum);
+
+                    for (int i = 0; i < cNum; i++)
+                    {
+                        Console.Write(arr[i] + "-");
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    [DllImport("CPPDLL.dll", EntryPoint = "func3", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func3(point a,out point b);
+
+    public static void test_func3()
+    {
+        point a=new point(1,2);
+        point b;
+        func3(a, out b);
+        Console.WriteLine("b:" + b.x + "," + b.y);
+    }
+
+
+    [DllImport("CPPDLL.dll", EntryPoint = "func4", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func4(point* a, int aNum,point* b,int bNum);
+
+    public static void test_func4()
+    {
+        point[] a =
+        {
+            new point(1,2),
+            new point(3,4),
+            new point(5,6)
         };
-        Point[] bcd = {
-            new Point(7,7.2),
-            new Point(8.5,8),
-            new Point(9.1,9),
-            new Point(10.1,11.9)
+        int aNum = a.Length;
+
+        int bNum = 2;
+        point[] b = new point[bNum];
+
+        unsafe
+        {
+            fixed(point* a_ptr=a)
+            {
+                fixed (point* b_ptr = b)
+                {
+                    func4(a_ptr, aNum, b_ptr, bNum);
+
+                    for (int i = 0; i < bNum; i++)
+                    {
+                        Console.WriteLine(b[i].x + "," + b[i].y);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+
+    [DllImport("CPPDLL.dll", EntryPoint = "func5", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func5(point** ployPoints, int ployNum, int* ployPointsNum);
+
+
+    public static void Test_func5()
+    {
+        point[] abc = {
+            new point(1.1,2.1),
+            new point(3,4),
+            new point(5,6.3)
+        };
+        point[] bcd = {
+            new point(7,7.2),
+            new point(8.5,8),
+            new point(9.1,9),
+            new point(10.1,11.9)
         };
         int[] length = { 3, 4 };
 
         unsafe
         {
-            fixed (Point* abc_ptr = abc)
+            fixed (point* abc_ptr = abc)
             {
-                fixed (Point* bcd_ptr = bcd)
+                fixed (point* bcd_ptr = bcd)
                 {
                     fixed (int* length_ptr = length)
                     {
-                        Point*[] points = { abc_ptr, bcd_ptr };
-                        fixed (Point** points_ptr = points)
+                        point*[] points = { abc_ptr, bcd_ptr };
+                        fixed (point** points_ptr = points)
                         {
                             ProcessPoints(points_ptr, length.Length, length_ptr);
                         }
@@ -69,18 +159,18 @@ public class Program
     }
 
 
-    [DllImport("CPPDLL.dll", EntryPoint = "ProcessPointsv2", SetLastError = true, CharSet = CharSet.Ansi)]
-    public static extern unsafe void ProcessPointsv2(Point** ployPoints, int ployNum, int[] ployPointsNum);
+    [DllImport("CPPDLL.dll", EntryPoint = "func6", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func6(point** ployPoints, int ployNum, int[] ployPointsNum);
 
     // C#申请第一层空间，C++申请第二层空间
-    public static void Test_interface2()
+    public static void Test_func6()
     {
         unsafe
         {
             int ployNum = 3;
-            Point*[] ployPointsList = new Point*[ployNum];
+            point*[] ployPointsList = new point*[ployNum];
             int[] ployPointsNum = new int[ployNum];
-            fixed (Point** ployPoints = ployPointsList)
+            fixed (point** ployPoints = ployPointsList)
             {
                 ProcessPointsv2(ployPoints, ployNum, ployPointsNum);
                 Console.WriteLine(ployNum);
@@ -97,12 +187,11 @@ public class Program
 
     public static void Main()
     {
-        // 基础数据类型
-        test_func1();
-        // 结构、指针传递
-        // C#的双重结构指针往C++传递数据
-        //Test_interface1();
-        // C#申请第一层结构空间，C++申请第二层结构指针空间
-        //Test_interface2();
+        //test_func1();
+        //test_func2();
+        //test_func3();
+        //test_func4();
+        //Test_func5();
+        //Test_func6();
     }
 }
