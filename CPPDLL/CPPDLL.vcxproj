@@ -138,8 +138,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>copy "E:\repos\CSharp_Call_CPPDLL\x64\Release\CPPDLL.dll" "E:\repos\CSharp_Call_CPPDLL\CSharp_Call_CPPDLL\bin\Release\net5.0"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "E:\repos\CSharp_Call_CPPDLL\x64\Release\CPPDLL.dll" "E:\repos\CSharp_Call_CPPDLL\CSharp_Call_CPPDLL\bin\Release\net5.0"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPPDLL.cpp" />

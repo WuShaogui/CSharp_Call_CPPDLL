@@ -4,6 +4,15 @@
 
 using namespace std;
 
+
+void func1(int a, double b, char c,int& d, double& e, char& f) {
+    std::cout << "[i n]C++: " << a << "-" << b << "-" << c << "-" << d << "-" << e << "-" << f << endl;
+    a = 8, b = 3.3, c = 'K';
+    d = 8, e = 10.2, f = 'G';
+    std::cout << "[out]C++: " << a << "-" << b << "-" << c << "-" << d << "-" << e << "-" << f << endl;
+};
+
+
 void ProcessPoints(point** ployPoints, int ployNum, int* ployPointsNum) {
 
     std::cout << ployNum << endl;

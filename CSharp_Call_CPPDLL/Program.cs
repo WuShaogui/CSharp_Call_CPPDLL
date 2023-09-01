@@ -5,6 +5,19 @@ using System.Runtime.InteropServices;
 public class Program
 {
 
+    [DllImport("CPPDLL.dll", EntryPoint = "func1", SetLastError = true, CharSet = CharSet.Ansi)]
+    public static extern unsafe void func1(int a, double b, char c,ref int d,ref double e,ref char f);
+
+    public static void test_func1()
+    {
+        int a = 1; double b = 2.2;char c = 'H';
+        int d=0; double e=0; char f=' ';
+        Console.WriteLine("[i n]C#  :"+a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
+        func1(a, b, c,ref d,ref e,ref f);
+        Console.WriteLine("[out]C#  :" + a + "-" + b + "-" + c + "-" + d + "-" + e + "-" + f);
+    }
+
+
     public struct Point
     {
         public double x;
@@ -84,10 +97,12 @@ public class Program
 
     public static void Main()
     {
+        // 基础数据类型
+        test_func1();
         // 结构、指针传递
         // C#的双重结构指针往C++传递数据
         //Test_interface1();
         // C#申请第一层结构空间，C++申请第二层结构指针空间
-        Test_interface2();
+        //Test_interface2();
     }
 }
