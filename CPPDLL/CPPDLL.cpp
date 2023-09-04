@@ -120,7 +120,8 @@ MyClass::MyClass()
     this->a2 = "hello";
     this->b.x = 1;
     this->b.y = 2;
-    this->c = new int[3]{ 4,5,6 };
+    this->cNum = 3;
+    this->c = new int[this->cNum]{ 4,5,6 };
     std::cout << "init UnManegerClass..." << endl;
 }
 
@@ -147,14 +148,18 @@ inline int MyClass::setB(point b)
     return 0;
 }
 
-inline int MyClass::setC(int* c,int num)
+inline int MyClass::setC(int* c,int cNum)
 {
-    this->c = new int[num];
-    for (int i = 0; i < num; i++) {
+    for (int i = 0; i < this->cNum; i++) {
+        std::cout << "[in]c:" << this->c[i] << " input:" << c[i] << endl;
+    }
+
+    this->c = new int[cNum];
+    for (int i = 0; i < cNum; i++) {
         this->c[i] = c[i];
     }
 
-    for (int i = 0; i < num; i++) {
+    for (int i = 0; i < cNum; i++) {
         std::cout << "[out]c:" << this->c[i]<<" input:"<<c[i] << endl;
     }
 

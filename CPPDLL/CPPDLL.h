@@ -44,4 +44,5 @@ private:
 	string a2;
 	point b;
 	int* c;
+	int cNum;
 };

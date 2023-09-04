@@ -214,7 +214,7 @@ public class Program
 
         Console.WriteLine("-------------------------------");
 
-        int[] c =  { 5, 6, 7 };
+        int[] c =  { 8,9,10,0 };
         int num = c.Length;
         unsafe
         {
