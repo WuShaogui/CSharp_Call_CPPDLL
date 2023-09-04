@@ -313,7 +313,9 @@ public static void Test_func6()
 
 **5. 类**
 
-- 类封送不能使用P/Invoke的方式，需要编写CLR工程封送
+- 类封送不能使用P/Invoke的方式，需要编写CLR工程封送，也就是“非托管类(C++) <-> 托管类(CLR) <->C#”，详细看CLR如何将C++的类MyClass以接口的形式封装为托管类ManegerClass
+
+
 
 
 # 技巧
