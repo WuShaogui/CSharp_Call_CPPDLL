@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+using CLRDLL;
 
 public class Program
 {
@@ -31,7 +32,7 @@ public class Program
     }
 
     [DllImport("CPPDLL.dll", EntryPoint = "func2", SetLastError = true, CharSet = CharSet.Ansi)]
-    public static extern unsafe void func2(int* a, int aNum,int* b,out IntPtr c, out int cNum);
+    public static extern unsafe void func2(int* a, int aNum,int* b,out IntPtr c, out int cNum,int[] d,int dNum);
 
     public static void test_func2()
     {
@@ -43,6 +44,8 @@ public class Program
         }
 
         int[] b = new int[2];
+        int dNum = 3;
+        int[] d = { 1, 2, 3 };
 
         int cNum = 0;
         unsafe
@@ -52,17 +55,21 @@ public class Program
                 fixed (int* b_ptr = b)
                 {
                     IntPtr c;
-                    func2(a_ptr, aNum, b_ptr, out c, out cNum);
+                    func2(a_ptr, aNum, b_ptr, out c, out cNum,d,dNum);
 
-                    Console.WriteLine("b:" + b[0]+","+b[1]);
+                    Console.WriteLine("[out]C#/b:" + b[0]+","+b[1]);
 
-                    Console.WriteLine("cNum:" + cNum);
                     int[] arr = new int[cNum];
                     Marshal.Copy(c, arr, 0, cNum);
-
                     for (int i = 0; i < cNum; i++)
                     {
                         Console.Write(arr[i] + "-");
+                    }
+
+                    Console.WriteLine("");
+                    for (int i = 0; i < dNum; i++)
+                    {
+                        Console.Write(d[i] + "-");
                     }
                 }
 
@@ -77,9 +84,11 @@ public class Program
     public static void test_func3()
     {
         point a=new point(1,2);
+        Console.WriteLine("[in]C#/a:" + a.x + "," + a.y);
+
         point b;
         func3(a, out b);
-        Console.WriteLine("b:" + b.x + "," + b.y);
+        Console.WriteLine("[out]C#/b:" + b.x + "," + b.y);
     }
 
 
@@ -114,8 +123,6 @@ public class Program
                 }
             }
         }
-
-
     }
 
 
@@ -150,7 +157,7 @@ public class Program
                         point*[] points = { abc_ptr, bcd_ptr };
                         fixed (point** points_ptr = points)
                         {
-                            ProcessPoints(points_ptr, length.Length, length_ptr);
+                            func5(points_ptr, length.Length, length_ptr);
                         }
                     }
                 }
@@ -172,7 +179,7 @@ public class Program
             int[] ployPointsNum = new int[ployNum];
             fixed (point** ployPoints = ployPointsList)
             {
-                ProcessPointsv2(ployPoints, ployNum, ployPointsNum);
+                func6(ployPoints, ployNum, ployPointsNum);
                 Console.WriteLine(ployNum);
                 for (int i = 0; i < ployNum; i++)
                 {
@@ -185,6 +192,40 @@ public class Program
         }
     }
 
+
+    public static void Test_func7()
+    {
+        CLRDLL.ManegerClass manegerClass=new CLRDLL.ManegerClass();
+
+        Console.WriteLine("-------------------------------");
+
+        int a1 = 10;
+        string str = "hello CLR";
+        manegerClass.setA(a1, str);
+
+        Console.WriteLine("-------------------------------");
+
+        CLRDLL.point_ p = new CLRDLL.point_();
+        p.x = 100;
+        p.y = 200;
+        manegerClass.setB(ref p);
+
+        Console.WriteLine(string.Format("p(x,y):({0},{1})", p.x, p.y));
+
+        Console.WriteLine("-------------------------------");
+
+        int[] c =  { 5, 6, 7 };
+        int num = c.Length;
+        unsafe
+        {
+            fixed(int* c_=c)
+            {
+                manegerClass.setC(c_, num);
+            }
+        }
+
+    }
+
     public static void Main()
     {
         //test_func1();
@@ -193,5 +234,6 @@ public class Program
         //test_func4();
         //Test_func5();
         //Test_func6();
+        Test_func7();
     }
 }
